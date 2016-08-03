@@ -1,0 +1,17 @@
+{
+  "name": "async-fun",
+  "version": "0.1.0",
+  "description": "Testing out Rx",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint src"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "~3.2.2",
+    "html-webpack-plugin": "~2.22.0",
+    "webpack": "~1.13.1"
+  }
+}
