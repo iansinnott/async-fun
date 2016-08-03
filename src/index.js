@@ -1,14 +1,12 @@
 import 'normalize.css';
 
-import { el } from './utils.js';
-
-window.el = el;
+import { div, span } from './dom.js';
 
 const root = document.querySelector('#root');
 
 root.appendChild(
-  el('div', { class: 'superDiv' }, [
+  div({ className: 'superDiv' }, [
     "I've also heard that creating your own react clone is ",
-    el('span', null, 'SUPER FUN'),
+    span(null, 'SUPER FUN'),
   ])
 );
