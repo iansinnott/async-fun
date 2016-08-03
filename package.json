@@ -5,8 +5,10 @@
   "main": "src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "serve": "webpack-dev-server --config webpack.config.dev.js --content-base dist",
+    "watch": "webpack --config webpack.config.dev.js --watch",
     "clean": "rimraf dist",
-    "bundle": "webpack",
+    "bundle": "webpack --config webpack.config.prod.js",
     "build": "npm run clean && npm run bundle",
     "lint": "eslint src"
   },
@@ -22,9 +24,12 @@
     "html-webpack-plugin": "~2.22.0",
     "rimraf": "~2.5.4",
     "style-loader": "~0.13.1",
-    "webpack": "~1.13.1"
+    "webpack": "~1.13.1",
+    "webpack-dev-server": "~1.14.1"
   },
   "dependencies": {
-    "normalize.css": "~4.2.0"
+    "normalize.css": "~4.2.0",
+    "rx": "~4.1.0",
+    "rx-dom": "~7.0.3"
   }
 }

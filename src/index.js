@@ -1,3 +1,5 @@
+import Rx from 'rx';
+import RxDOM from 'rx-dom';
 import 'normalize.css';
 
 import { forEach } from './utils.js';
@@ -15,7 +17,10 @@ const App = () => (
     "I've also heard that creating your own react clone is ",
     span(null, 'SUPER FUN'),
     div({
-      style: { color: 'orange' },
+      style: {
+        color: 'orange',
+        'font-weight': 'bold',
+      },
     }, Math.random()),
   ])
 );
@@ -23,7 +28,8 @@ const App = () => (
 // Initial render
 render(App(), root);
 
-// Rerender to display new randomized values occasionally
-setInterval(() => {
+document.addEventListener('DOMContentLoaded', () => {
+  console.log(Rx);
+  console.log(RxDOM);
   render(App(), root);
-}, 1000);
+});
