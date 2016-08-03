@@ -19,6 +19,10 @@ module.exports = {
         test: /\.css$/,
         loader: ExtractTextPlugin.extract('style', 'css'),
       },
+      {
+        test: /\.styl/,
+        loader: ExtractTextPlugin.extract('style', 'css!stylus'),
+      },
     ],
   },
   plugins: [

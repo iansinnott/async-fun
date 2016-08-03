@@ -5,7 +5,7 @@
   "main": "src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "serve": "webpack-dev-server --config webpack.config.dev.js --content-base dist",
+    "serve": "webpack-dev-server --config webpack.config.dev.js --content-base dist --inline",
     "watch": "webpack --config webpack.config.dev.js --watch",
     "clean": "rimraf dist",
     "bundle": "webpack --config webpack.config.prod.js",
@@ -24,6 +24,8 @@
     "html-webpack-plugin": "~2.22.0",
     "rimraf": "~2.5.4",
     "style-loader": "~0.13.1",
+    "stylus": "~0.54.5",
+    "stylus-loader": "~2.1.2",
     "webpack": "~1.13.1",
     "webpack-dev-server": "~1.14.1"
   },
