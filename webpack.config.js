@@ -1,4 +1,5 @@
 const HtmlPlugin = require('html-webpack-plugin');
+
 module.exports = {
   entry: 'src/index.js',
   output: {
@@ -6,7 +7,7 @@ module.exports = {
     filename: 'app.js',
   },
   plugins: [
-    HtmlPlugin(),
+    new HtmlPlugin(),
   ],
 };
 
