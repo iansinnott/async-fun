@@ -14,6 +14,7 @@
     "quotes": ["warn", "single"],
     "semi": ["warn", "always"],
     "comma-dangle": ["warn", "always-multiline"],
+    "no-unused-vars": "warn",
     "no-console": "off"
   }
 }
