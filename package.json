@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "clean": "rimraf dist",
-    "build": "webpack",
+    "bundle": "webpack",
+    "build": "npm run clean && npm run bundle",
     "lint": "eslint src"
   },
   "author": "",
