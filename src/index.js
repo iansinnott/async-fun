@@ -1,9 +1,10 @@
 import Rx from 'rx';
-import RxDOM from 'rx-dom';
+import { DOM } from 'rx-dom';
 import 'normalize.css';
 
 import { forEach } from './utils.js';
 import { div, span } from './dom.js';
+import './index.styl';
 
 const root = document.querySelector('#root');
 
@@ -12,24 +13,35 @@ const render = (dom, node) => {
   root.appendChild(dom);
 };
 
-const App = () => (
-  div({ className: 'superDiv' }, [
-    "I've also heard that creating your own react clone is ",
-    span(null, 'SUPER FUN'),
-    div({
+const Randomizer = () => (
+  div(
+    {
       style: {
         color: 'orange',
         'font-weight': 'bold',
       },
-    }, Math.random()),
+    },
+    div({ className: 'random' }, Math.random())
+  )
+);
+
+const App = () => (
+  div({ className: 'superDiv' }, [
+    "This is a baby react ",
+    span({ style: { 'font-weight': 'bold' } }, 'SUPER FUN'),
+    Randomizer(),
   ])
 );
 
 // Initial render
 render(App(), root);
 
-document.addEventListener('DOMContentLoaded', () => {
-  console.log(Rx);
-  console.log(RxDOM);
-  render(App(), root);
+const documentReady = DOM.fromEvent(document, 'DOMContentLoaded');
+
+documentReady.subscribe((e) => {
+  const clicks = DOM.click(document.body);
+
+  clicks.subscribe((e) => {
+    render(App(), root);
+  });
 });
