@@ -1,3 +1,15 @@
 {
-  "extends": "eslint:recommended"
+  "extends": "eslint:recommended",
+  "env": {
+    "browser": true,
+    "node": true
+  },
+  "rules": {
+    "indent": ["warn", 2],
+    "linebreak-style": ["error", "unix"],
+    "quotes": ["warn", "single"],
+    "semi": ["warn", "always"],
+    "comma-dangle": ["warn", "always"],
+    "no-console": "off"
+  }
 }
