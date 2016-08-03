@@ -64,7 +64,11 @@ export const normalizeChildren = (children) => {
     });
 };
 
-export const el = (tagName, props, children) => {
+export const el = (tagName, props, children, ...rest) => {
+  if (rest.length) {
+    console.warn('Warning: Too many arguments supplied to el. Maybe you forgot to wrap `children` in an array?');
+  }
+
   const element = document.createElement(tagName);
 
   if (props) {
