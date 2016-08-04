@@ -1,27 +1,35 @@
 import { forEach } from './utils.js';
-import { div, span, button } from './dom.js';
+import {
+  div,
+  span,
+  ul,
+  li,
+  img,
+  a,
+} from './dom.js';
 
-const Randomizer = () => (
-  div(
-    {
-      className: 'Randomizer',
-      style: {
-        color: 'orange',
-        'font-weight': 'bold',
-      },
-    },
+const UserListItem = (user) => (
+  li(
+    { className: 'UserListItem' },
     [
-      div({ className: 'random' }, Math.random()),
-      button({ className: 'clicker' }, 'Randomize'),
+      img({ src: user.avatar_url, className: 'avatar' }),
+      a({ href: user.html_url, target: '_blank' }, user.login),
     ]
   )
 );
 
-export const App = () => (
+const UserList = (users) => (
+  div(
+    { className: 'UserList' },
+    ul(null, users.map(u => UserListItem(u)))
+  )
+);
+
+export const App = (props) => (
   div({ className: 'superDiv' }, [
     'This is a baby react ',
     span({ style: { 'font-weight': 'bold' } }, 'SUPER FUN'),
-    Randomizer(),
+    UserList(props.users),
   ])
 );
 

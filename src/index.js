@@ -11,8 +11,12 @@ import './index.styl';
 
 const root = document.querySelector('#root');
 
+const initialState = {
+  users: [],
+};
+
 // Initial render
-render(App(), root);
+render(App(initialState), root);
 
 const documentReady = DOM.fromEvent(document, 'DOMContentLoaded');
 
@@ -29,7 +33,12 @@ const resStream = reqStream.flatMap(url => {
 documentReady.subscribe(() => {
 
   resStream.subscribe(
-    res => console.log(res),
+    res => {
+      console.log(res.data);
+      render(App({
+        users: res.data,
+      }), root);
+    },
     err => console.error(err),
     () => console.log('done')
   );
