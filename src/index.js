@@ -1,58 +1,37 @@
 import Rx from 'rx';
 import { DOM } from 'rx-dom';
+import axios from 'axios';
 import 'normalize.css';
 
-import { forEach } from './utils.js';
-import { div, span, button } from './dom.js';
+window.Rx = Rx;
+window.DOM = DOM;
+
+import { App, render } from './ui.js';
 import './index.styl';
 
 const root = document.querySelector('#root');
-
-const render = (dom, node) => {
-  forEach(node.children, x => node.removeChild(x));
-  root.appendChild(dom);
-};
-
-const Randomizer = () => (
-  div(
-    {
-      className: 'Randomizer',
-      style: {
-        color: 'orange',
-        'font-weight': 'bold',
-      },
-    },
-    [
-      div({ className: 'random' }, Math.random()),
-      button({ className: 'clicker' }, 'Randomize'),
-    ]
-  )
-);
-
-const App = () => (
-  div({ className: 'superDiv' }, [
-    "This is a baby react ",
-    span({ style: { 'font-weight': 'bold' } }, 'SUPER FUN'),
-    Randomizer(),
-  ])
-);
 
 // Initial render
 render(App(), root);
 
 const documentReady = DOM.fromEvent(document, 'DOMContentLoaded');
 
-documentReady.subscribe((e) => {
+const reqStream = Rx.Observable.just('https://api.github.com/users');
 
-  // This is a fairly simple example of the power of Rx. It's a bit silly, since
-  // we would normally probably subscribe to events directly on a dom node
-  // instaed of filtering by the classname on event.target, however for this
-  // case it's useful since every click renders a new button to the dom so we
-  // can't attach a listener to it right away.
-  const clicks = DOM.click(document.body)
-    .filter(e => e.target.className === 'clicker');
+// NOTE: The difference between map and flat map is that flatMap will unwrap
+// observables, which is quite useful for mappings where the returned value of
+// the mapper is an observable. This is much preferable to subscribing to every
+// mapped observable that comes back to us
+const resStream = reqStream.flatMap(url => {
+  return Rx.Observable.fromPromise(axios.get(url));
+});
 
-  clicks.subscribe((e) => {
-    render(App(), root);
-  });
+documentReady.subscribe(() => {
+
+  resStream.subscribe(
+    res => console.log(res),
+    err => console.error(err),
+    () => console.log('done')
+  );
+
 });

@@ -30,6 +30,7 @@
     "webpack-dev-server": "~1.14.1"
   },
   "dependencies": {
+    "axios": "~0.13.1",
     "normalize.css": "~4.2.0",
     "rx": "~4.1.0",
     "rx-dom": "~7.0.3"
