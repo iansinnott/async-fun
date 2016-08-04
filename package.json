@@ -15,6 +15,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "autoprefixer": "~6.4.0",
     "babel": "~6.5.2",
     "babel-loader": "~6.2.4",
     "babel-plugin-transform-es2015-modules-commonjs": "~6.11.5",
@@ -22,6 +23,7 @@
     "eslint": "~3.2.2",
     "extract-text-webpack-plugin": "~1.0.1",
     "html-webpack-plugin": "~2.22.0",
+    "postcss-loader": "~0.9.1",
     "rimraf": "~2.5.4",
     "style-loader": "~0.13.1",
     "stylus": "~0.54.5",

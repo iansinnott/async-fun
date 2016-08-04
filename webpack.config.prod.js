@@ -1,6 +1,7 @@
 const path = require('path');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlPlugin = require('html-webpack-plugin');
+const autoprefixer = require('autoprefixer');
 
 module.exports = {
   entry: './src/index.js',
@@ -21,7 +22,7 @@ module.exports = {
       },
       {
         test: /\.styl/,
-        loader: ExtractTextPlugin.extract('style', 'css!stylus'),
+        loader: ExtractTextPlugin.extract('style', 'css!postcss!stylus'),
       },
     ],
   },
@@ -31,5 +32,8 @@ module.exports = {
       template: './src/index.html',
     }),
   ],
+  postcss: function() {
+    return [autoprefixer({ browsers: ['last 2 versions'] })];
+  },
 };
 

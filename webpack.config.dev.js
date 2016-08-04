@@ -1,5 +1,6 @@
 const path = require('path');
 const HtmlPlugin = require('html-webpack-plugin');
+const autoprefixer = require('autoprefixer');
 
 module.exports = {
   entry: './src/index.js',
@@ -23,6 +24,7 @@ module.exports = {
         loaders: [
           'style',
           'css',
+          'postcss',
           'stylus',
         ],
       },
@@ -33,5 +35,8 @@ module.exports = {
       template: './src/index.html',
     }),
   ],
+  postcss: function() {
+    return [autoprefixer({ browsers: ['last 2 versions'] })];
+  },
 };
 
