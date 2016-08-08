@@ -22,7 +22,7 @@ const reqStream = refreshClickStream
     const randomOffset = Math.floor(Math.random() * 500);
     return `https://api.github.com/users?since=${randomOffset}`;
   })
-  .merge(Rx.Observable.just('https://api.github.com/users'));
+  .startWith('https://api.github.com/users');
 
 // NOTE: The difference between map and flat map is that flatMap will unwrap
 // observables, which is quite useful for mappings where the returned value of
