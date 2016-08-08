@@ -17,14 +17,12 @@ const documentReady = Rx.Observable.fromEvent(document, 'DOMContentLoaded');
 
 const refreshClickStream = Rx.Observable.fromEvent(document.querySelector('.refresh'), 'click');
 
-const refreshRequestStream = refreshClickStream.map(() => {
-  const randomOffset = Math.floor(Math.random() * 500);
-  return `https://api.github.com/users?since=${randomOffset}`;
-});
-
-const startupRequestStream = Rx.Observable.just('https://api.github.com/users');
-
-const reqStream = Rx.Observable.merge(startupRequestStream, refreshRequestStream);
+const reqStream = refreshClickStream
+  .map(() => {
+    const randomOffset = Math.floor(Math.random() * 500);
+    return `https://api.github.com/users?since=${randomOffset}`;
+  })
+  .merge(Rx.Observable.just('https://api.github.com/users'));
 
 // NOTE: The difference between map and flat map is that flatMap will unwrap
 // observables, which is quite useful for mappings where the returned value of
