@@ -6,6 +6,7 @@ import {
   li,
   img,
   a,
+  button,
 } from './dom.js';
 
 const UserListItem = (user) => (
@@ -14,6 +15,7 @@ const UserListItem = (user) => (
     [
       img({ src: user.avatar_url, className: 'avatar' }),
       a({ href: user.html_url, target: '_blank' }, user.login),
+      button({ className: 'remove' }, 'X'),
     ]
   )
 );
@@ -25,11 +27,12 @@ const UserList = (users) => (
   )
 );
 
-export const App = (props) => (
+export const App = ({ users }) => (
   div({ className: 'superDiv' }, [
-    'This is a baby react ',
-    span({ style: { 'font-weight': 'bold' } }, 'SUPER FUN'),
-    UserList(props.users),
+    button({ className: 'refresh' }, 'Refresh'),
+    (users.length ? UserList(users) : (
+      div({ className: 'loading' }, 'Loading...')
+    )),
   ])
 );
 
