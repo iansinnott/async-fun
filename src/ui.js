@@ -1,7 +1,6 @@
 import { forEach } from './utils.js';
 import {
   div,
-  span,
   ul,
   li,
   img,
@@ -9,13 +8,13 @@ import {
   button,
 } from './dom.js';
 
-const UserListItem = (user) => (
+const UserListItem = (user, index) => (
   li(
     { className: 'UserListItem' },
     [
       img({ src: user.avatar_url, className: 'avatar' }),
       a({ href: user.html_url, target: '_blank' }, user.login),
-      button({ className: 'remove' }, 'X'),
+      button({ className: 'remove', 'data-index': index }, 'X'),
     ]
   )
 );
@@ -23,7 +22,7 @@ const UserListItem = (user) => (
 const UserList = (users) => (
   div(
     { className: 'UserList' },
-    ul(null, users.map(u => UserListItem(u)))
+    ul(null, users.map(UserListItem))
   )
 );
 
